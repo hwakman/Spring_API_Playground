@@ -17,10 +17,11 @@ public class PersonController {
     @Autowired
     PersonRepository personRepository;
 
-    @GetMapping("/get_all")
+    @GetMapping("")
     public List<Person> getAllPerson() {
         List<Person> persons = new ArrayList<>();
         personRepository.findAll().forEach(persons::add);
+
         return persons;
     }
 
@@ -36,23 +37,27 @@ public class PersonController {
     public List<Person> getFirstName (@RequestParam(value = "first_name") String fName) {
         List<Person> persons = new ArrayList<>();
         personRepository.findByFirstName(fName).forEach(persons::add);
+        
         return persons;
     }
 
     @GetMapping("/get_last_id")
     public Long getLastId () {
+
         return personRepository.getLastId();
     }
 
-    @PostMapping("/add_person")
+    @PostMapping("/add")
     public String setPerson (@RequestParam(value = "first_name") String firstname, @RequestParam(value = "last_name") String lastname) {
         try {
             Person person = new Person();
             person.setFirst_name(firstname);
             person.setLast_name(lastname);
             personRepository.save(person);
+
             return "Value added";
         } catch (Exception e) {
+
             return "error : " + e;
         }
     }

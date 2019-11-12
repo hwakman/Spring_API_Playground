@@ -21,6 +21,7 @@ public class UserController {
     public List<User> getUser () {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add);
+
         return users;
     }
 
@@ -34,8 +35,10 @@ public class UserController {
             users.setName(name);
             users.setEmail(email);
             userRepository.save(users);
+
             return "Value added";
         } catch (Exception e) {
+
             return "Error : " + e;
         }
     }
@@ -46,8 +49,10 @@ public class UserController {
     ) {
         try {
             userRepository.deleteById(id);
+
             return "User id '"+id+"' was deleted.";
         } catch (Exception e) {
+            
             return "Error :" + e;
         }
     }

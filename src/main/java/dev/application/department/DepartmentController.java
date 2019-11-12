@@ -49,8 +49,10 @@ public class DepartmentController {
     ) {
         try {
             departmentRepository.deleteById(id);
+            
             return "Department id '"+id+"' was deleted.";
         } catch (Exception e) {
+
             return "Error : " + e;
         }
     }
